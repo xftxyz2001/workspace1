@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<!-- 引入刚刚下载的 ECharts 文件 -->
+	<script src="echarts/echarts.js"></script>
+</head>
+<body>
+	<div><h1>世界主要国家GDP的动态排序（2020~2023年）</h1></div>
+	<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+	<div id="main" style="width: 600px;height:400px;"></div>
+	<script type="text/javascript">
+ 
+	 // 测试数据
+	 var newArr = [
+			{
+				"cdate": "2020年",
+				"cname": "美国,中国,日本,德国,英国,印度,法国,意大利,加拿大,俄罗斯",
+				"cut": "208938,148626,50401,38433,27589,26677,26220,18911,16454,14834"
+			},
+			{
+				"cdate": "2021年",
+				"cname": "美国,中国,日本,德国,英国,印度,法国,意大利,加拿大,俄罗斯",
+				"cut": "229975,174580,49374,42259,31876,30420,29355,21013,19908,17755"
+			},
+			{
+				"cdate": "2022年",
+				"cname": "美国,中国,日本,德国,英国,印度,法国,意大利,加拿大,俄罗斯",
+				"cut": "254627,177009,42308,40856,30818,33896,27801,21860,21178,18624"
+			},
+			{
+				"cdate": "2023年",
+				"cname": "美国,中国,日本,德国,英国,印度,法国,意大利,加拿大,俄罗斯",
+				"cut": "269496,178863,42375,44298,33320,37322,30490,20120,21379,22442"
+			},
+			
+		]
+	
+	 // 柱形颜色
+	 const countryColors = {
+			 中国: '#dd6b66',
+			 美国: '#759aa0',
+			 日本: '#e69d87',
+			 印度: '#8dc1a9',
+			 德国: '#ea7e53',
+			 法国: '#eedd78',
+		 	 意大利: '#73a373',
+			 俄罗斯: '#73b9bc',
+			 加拿大: '#7289ab',
+			 英国: '#91ca8c',
+		 
+			};
+		
+	// 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+	var updateFrequency = 1000;	// 数据更新速度
+	var years = [];
+	var startIndex = 0;
+	
+	for (var i = 0; i < newArr.length; ++i) {
+		years.push(newArr[i]);
+	}
+	// 获取第一个数据
+	var startYear = years[startIndex].cdate;
+	var startName = years[startIndex].cname.split(',');
+	var startCut = years[startIndex].cut.split(',');
+	
+	var option = {
+			// 图标的上下左右边界
+		    grid: {
+		        top: 10,
+		        bottom: 30,
+		        left: 120,
+		        right: 120
+		    },
+		    // x 轴相关
+		    xAxis: {
+		        max: 'dataMax',
+		        splitLine: {
+		            show: true,  	
+		            lineStyle: {
+		                color: 'rgba(100,100,100, 0.4)',	
+		                type: 'dashed'
+		            }
+		        },
+		        
+		        axisLabel: {
+		        	// 圆整 X 轴 参数
+		            formatter: function (n) {
+		              return Math.round(n) + '';
+		            }
+		          }
+		    },
+		    dataset: {
+		        source: newArr
+		    },
+		    // y 轴数据
+		    yAxis: {
+		        type: 'category',
+		        inverse: true, 	// 大在上面，小在下面排序
+		        max: 9,			// 最多显示个数
+		        data: startName,
+		        axisLabel: {
+		            show: true,
+		            textStyle: {
+		                fontSize: 14
+		            },
+		            rich: {
+		                flag: {
+		                    fontSize: 25,
+		                    padding: 5
+		                }
+		            }
+		        },
+		        animationDuration: 300,
+		        animationDurationUpdate: 300
+		    },
+		    series: [{
+		        realtimeSort: true,
+		        seriesLayoutBy: 'column',
+		        type: 'bar',
+		        itemStyle: {
+		            /* color: 'rgb(13,208,229)' */
+		            color:function (param) {
+		                return  countryColors[param.name];
+		            }
+		        },
+		        encode: {
+		            x: 0,
+		            y: 3
+		        },
+		        label: {
+		            show: true,
+		            precision: 1,
+		            position: 'right',
+		            valueAnimation: true,
+		            fontFamily: 'monospace',
+		            formatter: function (data) {
+		                return startCut[data.dataIndex] + "万亿美元";
+		            } 
+		        },
+		        data: startCut
+		    }],
+		    
+		    animationDuration: 0,
+		    animationDurationUpdate: 10000,
+		    animationEasing: 'linear',
+		    animationEasingUpdate: 'linear',
+		    graphic: {
+		    	// 年代的文字 Text
+		        elements: [{
+		            type: 'text',
+		            right: 120,
+		            bottom: 60,
+		            style: {
+		                text: startYear,
+		                font: 'bolder 40px monospace',
+		                fill: 'rgba(100, 100, 100, 0.25)'
+		            },
+		            z: 100
+		        }]
+		    }
+		};
+	
+		// 使用刚指定的配置项和数据显示图表。
+	    myChart.setOption(option);
+	    for (var i = startIndex; i < newArr.length - 1; ++i) {
+		    (function (i) {
+		        setTimeout(function () {
+		            updateYear(years[i + 1]);
+		        }, (i + 1) * updateFrequency);
+		    })(i);
+		}
+ 
+	    // 更新数据
+		function updateYear(year) {
+			option.yAxis.data = year.cname.split(',');
+			//startCut = year.cut.split(',');
+			option.series[0].data = year.cut.split(',');
+			option.graphic.elements[0].style.text = year.cdate;
+		 	// 使用刚指定的配置项和数据显示图表。
+		     myChart.setOption(option);
+		}
+	</script>
+</body>
+</html>

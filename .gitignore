@@ -81,3 +81,6 @@ replay_pid*
 .idea/
 out/
 
+
+##########
+echarts/
