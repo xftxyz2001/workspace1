@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>无标题文档</title>
+	<script src="echarts/data_map_china.js"></script>
+	<script type="text/javascript" src="echarts/echarts.min.js"></script>
+</head>
+
+<body>
+	<div id="main" style="height: 600px;width: 1200px;background-color: aqua"></div>
+	<script type="text/javascript">
+		// var ROOT_PATH = 'https://echarts.apache.org/examples';
+
+		var chartDom = document.getElementById('main');
+		var myChart = echarts.init(chartDom);
+		var option;
+
+		myChart.showLoading();
+		// $.get(ROOT_PATH + '/data/asset/geo/HK.json', function (geoJson) {
+		myChart.hideLoading();
+		echarts.registerMap('China', geoJson);
+		myChart.setOption(
+			(option = {
+				title: {
+					text: '2022年中国各地区生产总值（亿元）',
+					subtext: 'Data from Wikipedia',
+					// sublink:
+					// 	'http://zh.wikipedia.org/wiki/%E9%A6%99%E6%B8%AF%E8%A1%8C%E6%94%BF%E5%8D%80%E5%8A%83#cite_note-12'
+				},
+				tooltip: {
+					trigger: 'item',
+					formatter: '{b}<br/>{c} (p / km2)'
+				},
+				toolbox: {
+					show: true,
+					orient: 'vertical',
+					left: 'right',
+					top: 'center',
+					feature: {
+						dataView: { readOnly: false },
+						restore: {},
+						saveAsImage: {}
+					}
+				},
+				visualMap: {
+					min: 800,
+					max: 50000,
+					text: ['High', 'Low'],
+					realtime: false,
+					calculable: true,
+					inRange: {
+						color: ['lightskyblue', 'yellow', 'orangered']
+					}
+				},
+				series: [
+					{
+						name: '中国各地区2022生产总值',
+						type: 'map',
+						map: 'China',
+						label: {
+							show: true
+						},
+						data: [
+							{ name: '广东', value: 129118.6 },
+							{ name: '江苏', value: 122875.6 },
+							{ name: '山东', value: 87435.1 },
+							{ name: '浙江', value: 77715.4 },
+							{ name: '河南', value: 61345 },
+							{ name: '四川', value: 56749.8 },
+							{ name: '湖北', value: 53734.9 },
+							{ name: '福建', value: 53109.9 },
+							{ name: '湖南', value: 48670.4 },
+							{ name: '安徽', value: 45045 },
+							{ name: '上海', value: 44652.8 },
+							{ name: '河北', value: 42370.4 },
+							{ name: '北京', value: 41610.9 },
+							{ name: '陕西', value: 32772.7 },
+							{ name: '江西', value: 32074.7 },
+							{ name: '重庆', value: 29129 },
+							{ name: '辽宁', value: 28975.1 },
+							{ name: '云南', value: 28954.2 },
+							{ name: '广西', value: 26300.9 },
+							{ name: '山西', value: 25642.6 },
+							{ name: '内蒙古', value: 23158.6 },
+							{ name: '贵州', value: 20164.6 },
+							{ name: '新疆', value: 17741.3 },
+							{ name: '天津', value: 16311.3 },
+							{ name: '黑龙江', value: 15901 },
+							{ name: '吉林', value: 13070.2 },
+							{ name: '甘肃', value: 11201.6 },
+							{ name: '海南', value: 6818.2 },
+							{ name: '宁夏', value: 5069.6 },
+							{ name: '青海', value: 3610.1 },
+							{ name: '西藏', value: 2132.6 }
+						]
+
+
+					}
+				]
+			})
+		);
+		// });
+
+		option && myChart.setOption(option);
+
+	</script>
+</body>
+
+</html>
