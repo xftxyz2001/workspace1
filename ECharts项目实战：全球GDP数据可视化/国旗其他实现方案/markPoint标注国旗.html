@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="main" style="width: 600px; height: 400px; background-color: bisque;"></div>
+  <script src="../lib/echarts.5.3.2.min.js"></script>
+  <script>
+    let myChart = echarts.init(document.getElementById('main'))
+    let option = {
+      xAxis: {
+        max: 'dataMax'
+      },
+      yAxis: {
+        // realtimeSort: true,
+        type: 'category',
+        // data: ['A', 'B', 'C', 'D', 'E'],
+        inverse: true, // 是否反向坐标轴
+        animationDuration: 300,
+        animationDurationUpdate: 300,
+        max: 4 // only the largest 3 bars will be displayed
+      },
+      series: [
+        {
+          // realtimeSort: true,
+          data: [[120, 'A'], [200, 'B'], [150, 'C'], [80, 'D'], [70, 'E'], [110, 'F'], [130, 'G']],
+          type: 'bar',
+          label: {
+            show: true,
+            position: 'right',
+            offset: [60, 0]
+          },
+          markPoint: {
+            // realtimeSort: true,
+            // symbol: function (a, b) {
+            //   // console.log(b)
+            //   // b.data.xAxis = 150
+            //   // return 'image://images/China.svg'
+            // },
+            symbolSize: [53, 35],
+            symbolOffset: [30, 0],
+            data: [
+              {
+                // coord: ['Thu', 120],
+                xAxis: 200,
+                yAxis: 'B',
+                // value: 120
+                symbol: 'image://../images/America.svg',
+              },
+              {
+                // coord: ['Thu', 120],
+                xAxis: 150,
+                yAxis: 'C',
+                // value: 120
+                symbol: 'image://../images/Canada.svg',
+              },
+              {
+                // coord: ['Thu', 120],
+                xAxis: 130,
+                yAxis: 'G',
+                // value: 120
+                symbol: 'image://../images/Italy.svg',
+              },
+              {
+                // coord: ['Thu', 120],
+                xAxis: 120,
+                yAxis: 'A',
+                // value: 120
+                symbol: 'image://../images/China.svg',
+              },
+              {
+                // coord: ['Thu', 120],
+                xAxis: 110,
+                yAxis: 'F',
+                // value: 120
+                symbol: 'image://../images/French.svg',
+              },
+              {
+                // coord: ['Thu', 120],
+                xAxis: 80,
+                yAxis: 'D',
+                // value: 120
+                symbol: 'image://../images/Belgium.svg',
+              },
+              {
+                // coord: ['Thu', 120],
+                xAxis: 70,
+                yAxis: 'E',
+                // value: 120
+                symbol: 'image://../images/Argentina.svg',
+              },
+            ]
+          }
+        },
+      ]
+    };
+    myChart.setOption(option)
+  </script>
+
+  <hr>
+  <!-- <img src="images/Italy.svg" alt=""> -->
+</body>
+
+</html>

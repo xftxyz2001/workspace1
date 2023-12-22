@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="main" style="width: 600px; height: 400px; background-color: bisque;"></div>
+  <script src="../lib/echarts.5.3.2.min.js"></script>
+  <script>
+    let myChart = echarts.init(document.getElementById('main'))
+    let option = {
+      grid: {
+        left: '15%'
+      },
+      xAxis: {
+        max: 'dataMax'
+      },
+      yAxis: {
+        type: 'category',
+        // data: ['A', 'B', 'C', 'D', 'E'],
+        inverse: true, // 是否反向坐标轴
+        animationDuration: 300,
+        animationDurationUpdate: 300,
+        max: 4, // only the largest 3 bars will be displayed
+        axisLabel: {
+          formatter: function (param) {
+            console.log(param)
+            return param + ' {img|}'
+          },
+          rich: {
+            img: {
+              backgroundColor: {
+                image: '../images/China.svg'
+              },
+              height: 35,
+              width: 53
+            }
+          }
+        }
+      },
+      series: [
+        {
+          realtimeSort: true,
+          data: [[120, 'A'], [200, 'B'], [150, 'C'], [80, 'D'], [70, 'E'], [110, 'F'], [130, 'G']],
+          type: 'bar',
+          label: {
+            show: true,
+            position: 'right',
+          }
+        }
+      ]
+    };
+    myChart.setOption(option)
+  </script>
+
+  <hr>
+  <!-- <img src="images/America.svg" alt=""> -->
+</body>
+
+</html>

@@ -1,0 +1,3 @@
+- [CSDN/ECharts项目实战：全球GDP数据可视化](https://blog.csdn.net/JACK_SUJAVA/article/details/128397129)
+- [黑马程序员视频库/ECharts项目实战：全球GDP数据可视化](https://yun.itheima.com/open/753.html)
+- [百度网盘/ECharts项目实战：全球GDP数据可视化视频及资料](https://pan.baidu.com/s/1QyptAhja2TkUzWJCahhoMA?pwd=y58l)

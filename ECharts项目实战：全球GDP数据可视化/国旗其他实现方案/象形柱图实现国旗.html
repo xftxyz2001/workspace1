@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="main" style="width: 600px; height: 400px; background-color: bisque;"></div>
+  <script src="../lib/echarts.5.1.2.min.js"></script>
+  <script>
+    let myChart = echarts.init(document.getElementById('main'))
+    let option = {
+      xAxis: {
+        max: 'dataMax'
+      },
+      yAxis: {
+        type: 'category',
+        // data: ['A', 'B', 'C', 'D', 'E'],
+        inverse: true, // 是否反向坐标轴
+        animationDuration: 300,
+        animationDurationUpdate: 300,
+        max: 4 // only the largest 3 bars will be displayed
+      },
+      series: [
+        {
+          data: [[120, 'A'], [200, 'B'], [150, 'C'], [80, 'D'], [70, 'E'], [110, 'F'], [130, 'G']],
+          type: 'bar',
+          label: {
+            show: true,
+            position: 'right',
+            offset: [60, 0]
+          }
+        },
+        {
+          name: "glyph",
+          type: "pictorialBar",
+          barGap: "-100%", // 两个柱子重叠，图形柱状图当背景需设置
+          symbolPosition: "end",
+          symbolSize: [53, 35],
+          symbolOffset: [58, 0],
+          // symbolRotate: 10,
+          data: [
+            {
+              value: 120,
+              symbol: 'image://../images/China.svg',
+            },
+            {
+              value: 200,
+              symbol: 'image://../images/America.svg',
+            },
+            {
+              value: 150,
+              symbol: 'image://../images/America.svg',
+            },
+            {
+              value: 80,
+              symbol: 'image://../images/America.svg',
+            },
+            {
+              value: 70,
+              symbol: 'image://../images/America.svg',
+            },
+            // bar里面的数据显示5项。所以这里不能写6项
+            // {
+            //   value: 70,
+            //   symbol: 'image://../images/America.svg',
+            // },
+          ],
+        }
+      ]
+    };
+    myChart.setOption(option)
+  </script>
+
+  <hr>
+  <!-- <img src="images/America.svg" alt=""> -->
+</body>
+
+</html>
