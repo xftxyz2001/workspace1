@@ -136,9 +136,11 @@
 		            position: 'right',
 		            valueAnimation: true,
 		            fontFamily: 'monospace',
-		            formatter: function (data) {
-		                return startCut[data.dataIndex] + "万亿美元";
-		            } 
+					formatter: '{@value}万亿美元'
+		            // formatter: function (data) {
+					// 	return `${data.value}万亿美元`;
+		            //     // return startCut[data.dataIndex] + "万亿美元";
+		            // } 
 		        },
 		        data: startCut
 		    }],
@@ -182,6 +184,15 @@
 		 	// 使用刚指定的配置项和数据显示图表。
 		     myChart.setOption(option);
 		}
+
+		// 循环执行
+		setInterval(function () {
+		    startIndex++;
+		    if (startIndex > newArr.length - 1) {
+		        startIndex = 0;
+		    }
+		    updateYear(years[startIndex]);
+		}, updateFrequency);
 	</script>
 </body>
 </html>
