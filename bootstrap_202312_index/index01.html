@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>index01</title>
+  <script src="echarts/data_map_china.js"></script>
+  <script src="echarts/echarts.min.js"></script>
+  <link href="bootstrap-5.3.0-alpha1-examples/bootstrap-5.3.0-alpha1-examples/assets/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link href="bootstrap-5.3.0-alpha1-examples/bootstrap-5.3.0-alpha1-examples/dashboard/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="index.html">世界GDP总量可视化网站</a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+      data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search"
+      aria-label="Search">
+    <div class="navbar-nav">
+      <div class="nav-item text-nowrap">
+
+      </div>
+    </div>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="position-sticky pt-3 sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">
+                <span data-feather="home" class="align-text-bottom"></span>
+                世界主要国家
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="index01.html">
+                <span data-feather="file" class="align-text-bottom"></span>
+                中国各省份
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">中国各地区2022年生产总值（万元）</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+
+            </div>
+
+          </div>
+        </div>
+
+        <div id="map0101" style="width: 100%; height: 800px; background: #F0E5E3"></div>
+
+
+        <h2>中国分区域2022年生产总值占比</h2>
+        <div id="chart0102" style="width: 49%;height: 500px;float: left;"></div>
+        <div id="chart0103" style="width: 49%;height: 500px;float: left"></div>
+
+      </main>
+    </div>
+  </div>
+
+
+  <script
+    src="bootstrap-5.3.0-alpha1-examples/bootstrap-5.3.0-alpha1-examples/assets/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script type="text/javascript">
+
+    // var ROOT_PATH = 'https://echarts.apache.org/examples';
+
+    var chartDom = document.getElementById('map0101');
+    var myChartmap0101 = echarts.init(chartDom);
+    var option;
+
+    myChartmap0101.showLoading();
+    // $.get(ROOT_PATH + '/data/asset/geo/HK.json', function (geoJson) {
+    myChartmap0101.hideLoading();
+    echarts.registerMap('China', geoJson);
+    myChartmap0101.setOption(
+      (option = {
+        title: {
+          text: '2022年中国各地区生产总值（亿元）',
+          subtext: 'Data from Wikipedia',
+          // sublink:
+          // 	'http://zh.wikipedia.org/wiki/%E9%A6%99%E6%B8%AF%E8%A1%8C%E6%94%BF%E5%8D%80%E5%8A%83#cite_note-12'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b}<br/>{c} (亿元)'
+        },
+        toolbox: {
+          show: true,
+          orient: 'vertical',
+          left: 'center',
+          top: 'center',
+          feature: {
+            dataView: { readOnly: false },
+            restore: {},
+            saveAsImage: {}
+          }
+        },
+        visualMap: {
+          min: 2000,
+          max: 130000,
+          text: ['High', 'Low'],
+          realtime: false,
+          calculable: true,
+          inRange: {
+            color: ['lightskyblue', 'yellow', 'orangered']
+          }
+        },
+        series: [
+          {
+            name: '中国各地区2022生产总值',
+            type: 'map',
+            map: 'China',
+            label: {
+              show: true
+            },
+            data: [
+              { name: '广东', value: 129118.6 },
+              { name: '江苏', value: 122875.6 },
+              { name: '山东', value: 87435.1 },
+              { name: '浙江', value: 77715.4 },
+              { name: '河南', value: 61345 },
+              { name: '四川', value: 56749.8 },
+              { name: '湖北', value: 53734.9 },
+              { name: '福建', value: 53109.9 },
+              { name: '湖南', value: 48670.4 },
+              { name: '安徽', value: 45045 },
+              { name: '上海', value: 44652.8 },
+              { name: '河北', value: 42370.4 },
+              { name: '北京', value: 41610.9 },
+              { name: '陕西', value: 32772.7 },
+              { name: '江西', value: 32074.7 },
+              { name: '重庆', value: 29129 },
+              { name: '辽宁', value: 28975.1 },
+              { name: '云南', value: 28954.2 },
+              { name: '广西', value: 26300.9 },
+              { name: '山西', value: 25642.6 },
+              { name: '内蒙古', value: 23158.6 },
+              { name: '贵州', value: 20164.6 },
+              { name: '新疆', value: 17741.3 },
+              { name: '天津', value: 16311.3 },
+              { name: '黑龙江', value: 15901 },
+              { name: '吉林', value: 13070.2 },
+              { name: '甘肃', value: 11201.6 },
+              { name: '海南', value: 6818.2 },
+              { name: '宁夏', value: 5069.6 },
+              { name: '青海', value: 3610.1 },
+              { name: '西藏', value: 2132.6 }
+            ]
+
+
+          }
+        ]
+      })
+    );
+    // });
+
+    option && myChartmap0101.setOption(option);
+
+    var chartDom = document.getElementById('chart0102');
+    var myChartchart0102 = echarts.init(chartDom);
+    var option;
+
+    option = {
+      backgroundColor: '#F2E5E5',
+      title: {
+        text: '中国五大区域2022年生产总值占比',
+        left: 'center',
+        top: 40,
+        textStyle: {
+          color: '#984748'
+        }
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      visualMap: {
+        show: false,
+        min: 70,
+        max: 900,
+        inRange: {
+          colorLightness: [0, 1]
+        }
+      },
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '50%'],
+          data: [
+            { value: 622.018, name: '中部' },
+            { value: 266.513, name: '西部' },
+            { value: 256.985, name: '东部' }
+          ].sort(function (a, b) {
+            return a.value - b.value;
+          }),
+          roseType: 'radius',
+          label: {
+            color: 'rgba(0, 0, 0, 0.5)',
+          },
+          labelLine: {
+            lineStyle: {
+              color: 'rgba(0, 0, 0, 0.5)'
+            },
+            smooth: 0.2,
+            length: 10,
+            length2: 20
+          },
+          itemStyle: {
+            color: '#c23531',
+            shadowBlur: 200,
+            shadowColor: '#724e58'
+          },
+          animationType: 'scale',
+          animationEasing: 'elasticOut',
+          animationDelay: function (idx) {
+            return Math.random() * 200;
+          }
+        }
+      ]
+    };
+
+    option && myChartchart0102.setOption(option);
+
+    var chartDom = document.getElementById('chart0103');
+    var myChartchart0103 = echarts.init(chartDom);
+    var option;
+
+    option = {
+      backgroundColor: '#F2E5E5',
+      title: {
+        text: '中国五大区域2022年生产总值占比',
+        left: 'center',
+        top: 40,
+        textStyle: {
+          color: '#984748'
+        }
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      visualMap: {
+        show: false,
+        min: 70,
+        max: 900,
+        inRange: {
+          colorLightness: [0, 1]
+        }
+      },
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '50%'],
+          data: [
+            { value: 622.018, name: '中部' },
+            { value: 266.513, name: '西部' },
+            { value: 256.985, name: '东部' }
+          ].sort(function (a, b) {
+            return a.value - b.value;
+          }),
+          roseType: 'radius',
+          label: {
+            color: 'rgba(0, 0, 0, 0.5)',
+          },
+          labelLine: {
+            lineStyle: {
+              color: 'rgba(0, 0, 0, 0.5)'
+            },
+            smooth: 0.2,
+            length: 10,
+            length2: 20
+          },
+          itemStyle: {
+            color: '#c23531',
+            shadowBlur: 200,
+            shadowColor: '#724e58'
+          },
+          animationType: 'scale',
+          animationEasing: 'elasticOut',
+          animationDelay: function (idx) {
+            return Math.random() * 200;
+          }
+        }
+      ]
+    };
+
+    option && myChartchart0103.setOption(option);
+
+    // 图表自适应
+    window.addEventListener('resize', function () {
+      myChartmap0101.resize();
+      myChartchart0102.resize();
+      myChartchart0103.resize();
+    });
+
+  </script>
+
+</body>
+
+</html>
