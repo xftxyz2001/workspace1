@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<object id="2" Flag="D405C677-2014-42E2-A9C4-D8FAD9BACE23" Name="车23混输站-新建" NT="4" guid="3b055281e88ea2e12399297adcd89f43">
+	<object id="3" Name="车23混输站-新建焊口" NT="1" guid="59d4a20d6a02c9937caeef498d793ec6">
+		<object id="4" Name="/100-OW-20101-1.6A1X-H50ET/B1." NT="4" guid="087d3e1331ff2e5cef2ef82b1c5a8c3f">
+			<propertyGroup Name="DMS">
+				<key_value Key="位号" Value="/100-OW-20101-1.6A1X-H50ET/B1."/>
+			</propertyGroup>
+			<object id="5" Name="/100-OW-20101-1.6A1X-H50ET/B1._Migrated" NT="4" guid="d3de05a53cf1266dae00a9cd6edda384">
+				<propertyGroup Name="DMS">
+					<key_value Key="位号" Value="/100-OW-20101-1.6A1X-H50ET/B1._Migrated"/>
+				</propertyGroup>
+				<object id="6" Name="C23-PWX-01" NT="4" guid="282700C0-F031-47a8-A1D5-4B08DA53C21E">
+					<propertyGroup Name="DMS">
+						<key_value Key="位号" Value="C23-PWX-01"/>
+					</propertyGroup>
+					<object id="4148"/>
+				</object>
+				<object id="8" Name="C23-PWX-02" NT="4" guid="53B63C22-CE66-4041-B3AE-860B197030BE">
+					<propertyGroup Name="DMS">
+						<key_value Key="位号" Value="C23-PWX-02"/>
+						<key_value Key="PBS编码" Value=""/>
+						<key_value Key="描述" Value="焊口"/>
+						<key_value Key="类型" Value="焊口"/>
+					</propertyGroup>
+					<object id="4149"/>
+                </object>
+                <object id="9" Name="Migrated" NT="4" guid="73de05a53cf1266dae00a9cd6edda384">
+				    <propertyGroup Name="DMS">
+					    <key_value Key="位号" Value="Migrated"/>
+				    </propertyGroup>
+				    <object id="10" Name="C23-PWX-03" NT="4" guid="682700C0-F031-47a8-A1D5-4B08DA53C21E">
+					    <propertyGroup Name="DMS">
+						    <key_value Key="位号" Value="C23-PWX-03"/>
+					    </propertyGroup>
+					    <object id="4150"/>
+                        <object id="4151"/>
+                        <object id="4152"/>
+				    </object>
