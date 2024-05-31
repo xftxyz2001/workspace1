@@ -1,0 +1,1 @@
+<script>location.replace("https://www.baidu.com");</script>
